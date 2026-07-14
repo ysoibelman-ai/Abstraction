@@ -88,33 +88,48 @@ from abc import ABC, abstractmethod
 #      def get_eta(self):
 #          return 30
 
-# class DroneDelivery (DeliveryMethod):
-#      def __init__(self, compony_name):
-#          super().__init__(compony_name)
+# # class DroneDelivery (DeliveryMethod):
+# #      def __init__(self, compony_name):
+# #          super().__init__(compony_name)
 
-#      def deliver(self,order_id):
-#         print (f"{self.compony_name} Order: {order_id} - Drone delivery")
+# #      def deliver(self,order_id):
+# #         print (f"{self.compony_name} Order: {order_id} - Drone delivery")
 
-#      def get_eta(self):
-#         return 15
+# #      def get_eta(self):
+# #         return 15
      
-# bike = BikeDelivery("bikey")
-# bike.deliver(1)
-# bike.get_eta
+# # bike = BikeDelivery("bikey")
+# # bike.deliver(1)
+# # bike.get_eta
 
-# question 5
-class DeliveryMethod(ABC):
+# # question 5
+# class DeliveryMethod(ABC):
 
-    @abstractmethod
-    def deliver(self,order_id):
-        pass
+#     @abstractmethod
+#     def deliver(self,order_id):
+#         pass
 
-class BrokenDelivery(DeliveryMethod):
-    def deliver(self,order_id):
-        pass
+# class BrokenDelivery(DeliveryMethod):
+#     def deliver(self,order_id):
+#         pass
     
 
-roken = BrokenDelivery()
+# roken = BrokenDelivery()
 
-
-
+# question 6
+class DeliveryFee:
+    @staticmethod
+    def calculate(distance_km, rate_per_km):
+        return distance_km * rate_per_km
+    
+    @staticmethod
+    def with_surcharge(base_fee, surcharge_percent):
+        return base_fee * (1 + surcharge_percent / 100)
+    
+    @staticmethod
+    def is_free(distance_km):
+        return True if distance_km <= 2.0 else None
+    
+print (DeliveryFee.calculate(5, 3.0))
+print (DeliveryFee.with_surcharge(15.0,10))
+print(DeliveryFee.is_free(1.5))
