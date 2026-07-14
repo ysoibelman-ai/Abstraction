@@ -135,38 +135,62 @@ from abc import ABC, abstractmethod
 # print(DeliveryFee.is_free(1.5))
 
 # question 7
-class DeliveryMethod(ABC):
+# class DeliveryMethod(ABC):
     
+#     @abstractmethod
+#     def deliver (self, order_id):
+#         pass
+
+#     @abstractmethod
+#     def get_eta():
+#         pass
+
+# class WalkingDelivery (DeliveryMethod):
+    
+#     def deliver (self, order_id):
+#         pass
+
+#     def get_eta(self):
+#         return 60
+
+# class ExpressDelivery (DeliveryMethod):
+    
+#     def deliver (self, order_id):
+#         pass
+
+#     def get_eta(self):
+#         return 10
+
+# class DeliveryHelper:
+#     @staticmethod
+#     def faster (d1,d2):
+#         if d1.get_eta() < d2.get_eta():
+#             return d1
+#         else:
+#             return d2
+
+# print (f"Faster Option: {DeliveryHelper.faster(WalkingDelivery(),ExpressDelivery()).__class__.__name__}")
+
+# question 8 
+class Notifier (ABC):
     @abstractmethod
-    def deliver (self, order_id):
+    def send (self,recipient,message):
         pass
 
-    @abstractmethod
-    def get_eta():
-        pass
+class PushNotifier(Notifier):
 
-class WalkingDelivery (DeliveryMethod):
-    
-    def deliver (self, order_id):
-        pass
+    def send (self,recipient,message):
+        return f"Push to {recipient}: {message}"
 
-    def get_eta(self):
-        return 60
+class WhatsAppNotifier(Notifier):
+    def send (self,recipient,message):
+        return f"WhatsApp to {recipient}: {message}"
 
-class ExpressDelivery (DeliveryMethod):
-    
-    def deliver (self, order_id):
-        pass
+class InAppNotifier (Notifier):
+    def send (self,recipient,message):
+        return f"In-App banner for {recipient}: {message}"
 
-    def get_eta(self):
-        return 10
+notifier_list = [PushNotifier(),WhatsAppNotifier(),InAppNotifier()]
 
-class DeliveryHelper:
-    @staticmethod
-    def faster (d1,d2):
-        if d1.get_eta() < d2.get_eta():
-            return d1
-        else:
-            return d2
-
-print (f"Faster Option: {DeliveryHelper.faster(WalkingDelivery(),ExpressDelivery()).__class__.__name__}")
+for notification in notifier_list:
+    print (notification.send ("customer_42", "Your order is under way"))
