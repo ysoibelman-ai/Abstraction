@@ -171,26 +171,59 @@ from abc import ABC, abstractmethod
 
 # print (f"Faster Option: {DeliveryHelper.faster(WalkingDelivery(),ExpressDelivery()).__class__.__name__}")
 
-# question 8 
-class Notifier (ABC):
+# # question 8 
+# class Notifier (ABC):
+#     @abstractmethod
+#     def send (self,recipient,message):
+#         pass
+
+# class PushNotifier(Notifier):
+
+#     def send (self,recipient,message):
+#         return f"Push to {recipient}: {message}"
+
+# class WhatsAppNotifier(Notifier):
+#     def send (self,recipient,message):
+#         return f"WhatsApp to {recipient}: {message}"
+
+# class InAppNotifier (Notifier):
+#     def send (self,recipient,message):
+#         return f"In-App banner for {recipient}: {message}"
+
+# notifier_list = [PushNotifier(),WhatsAppNotifier(),InAppNotifier()]
+
+# for notification in notifier_list:
+#     print (notification.send ("customer_42", "Your order is under way"))
+
+# question 9
+class Restaurant (ABC):
     @abstractmethod
-    def send (self,recipient,message):
+    def get_menu() -> list:
+        pass
+    @abstractmethod
+    def prepare_order (item_name):
         pass
 
-class PushNotifier(Notifier):
+class ItalianRestaurant (Restaurant):
+    menu = ['pasta', 'pizza', 'tiramisu']
+    def get_menu(menu) -> list:
+        return menu
+    def prepare_order (self, item_name):
+        return f"Sto preparando questo cibo per te: {item_name}"
 
-    def send (self,recipient,message):
-        return f"Push to {recipient}: {message}"
+class SushiRestaurant (Restaurant):
+    menu = ['maki', 'nigiri', 'ramen']
+    def get_menu(menu) -> list:
+        return menu
+    def prepare_order (self, item_name):
+        return f"Kiminotameni kono ryōri o tsukutte iru nda: {item_name}"
 
-class WhatsAppNotifier(Notifier):
-    def send (self,recipient,message):
-        return f"WhatsApp to {recipient}: {message}"
+class BurgerJoint (Restaurant):
+    menu = ['burger', 'fries', 'shake']
+    def get_menu(menu) -> list:
+        menu
+    def prepare_order (self, item_name):
+        return f"Were are preparing {item_name} in the speed of light"
 
-class InAppNotifier (Notifier):
-    def send (self,recipient,message):
-        return f"In-App banner for {recipient}: {message}"
-
-notifier_list = [PushNotifier(),WhatsAppNotifier(),InAppNotifier()]
-
-for notification in notifier_list:
-    print (notification.send ("customer_42", "Your order is under way"))
+for rest in [ItalianRestaurant(), SushiRestaurant(), BurgerJoint()]:
+    print (f"Menu: {rest.menu}\nPreparing: {rest.prepare_order(rest.menu[0])}\n")
