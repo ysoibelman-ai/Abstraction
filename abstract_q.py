@@ -116,20 +116,57 @@ from abc import ABC, abstractmethod
 
 # roken = BrokenDelivery()
 
-# question 6
-class DeliveryFee:
-    @staticmethod
-    def calculate(distance_km, rate_per_km):
-        return distance_km * rate_per_km
+# # question 6
+# class DeliveryFee:
+#     @staticmethod
+#     def calculate(distance_km, rate_per_km):
+#         return distance_km * rate_per_km
     
-    @staticmethod
-    def with_surcharge(base_fee, surcharge_percent):
-        return base_fee * (1 + surcharge_percent / 100)
+#     @staticmethod
+#     def with_surcharge(base_fee, surcharge_percent):
+#         return base_fee * (1 + surcharge_percent / 100)
     
-    @staticmethod
-    def is_free(distance_km):
-        return True if distance_km <= 2.0 else None
+#     @staticmethod
+#     def is_free(distance_km):
+#         return True if distance_km <= 2.0 else None
     
-print (DeliveryFee.calculate(5, 3.0))
-print (DeliveryFee.with_surcharge(15.0,10))
-print(DeliveryFee.is_free(1.5))
+# print (DeliveryFee.calculate(5, 3.0))
+# print (DeliveryFee.with_surcharge(15.0,10))
+# print(DeliveryFee.is_free(1.5))
+
+# question 7
+class DeliveryMethod(ABC):
+    
+    @abstractmethod
+    def deliver (self, order_id):
+        pass
+
+    @abstractmethod
+    def get_eta():
+        pass
+
+class WalkingDelivery (DeliveryMethod):
+    
+    def deliver (self, order_id):
+        pass
+
+    def get_eta(self):
+        return 60
+
+class ExpressDelivery (DeliveryMethod):
+    
+    def deliver (self, order_id):
+        pass
+
+    def get_eta(self):
+        return 10
+
+class DeliveryHelper:
+    @staticmethod
+    def faster (d1,d2):
+        if d1.get_eta() < d2.get_eta():
+            return d1
+        else:
+            return d2
+
+print (f"Faster Option: {DeliveryHelper.faster(WalkingDelivery(),ExpressDelivery()).__class__.__name__}")
