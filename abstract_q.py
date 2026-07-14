@@ -102,5 +102,19 @@ from abc import ABC, abstractmethod
 # bike.deliver(1)
 # bike.get_eta
 
+# question 5
+class DeliveryMethod(ABC):
+
+    @abstractmethod
+    def deliver(self,order_id):
+        pass
+
+class BrokenDelivery(DeliveryMethod):
+    def deliver(self,order_id):
+        pass
+    
+
+roken = BrokenDelivery()
+
 
 
