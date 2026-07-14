@@ -38,31 +38,69 @@ from abc import ABC, abstractmethod
 # drone = DroneDelivery()
 # drone.deliver(202)
 
-# question 3
-class DeliveryMethod(ABC):
-    def __init__(self, compony_name):
-        self.compony_name = compony_name
+# # question 3
+# class DeliveryMethod(ABC):
+#     def __init__(self, compony_name):
+#         self.compony_name = compony_name
 
-    @abstractmethod
-    def deliver(self,order_id):
-        pass
+#     @abstractmethod
+#     def deliver(self,order_id):
+#         pass
 
-class BikeDelivery (DeliveryMethod):
-     def __init__(self, compony_name):
-         super().__init__(compony_name)
+# class BikeDelivery (DeliveryMethod):
+#      def __init__(self, compony_name):
+#          super().__init__(compony_name)
      
-     def deliver(self,order_id):
-        print (f"{self.compony_name} Order: {order_id} - Bike delivery")
+#      def deliver(self,order_id):
+#         print (f"{self.compony_name} Order: {order_id} - Bike delivery")
 
-class DroneDelivery (DeliveryMethod):
-     def __init__(self, compony_name):
-         super().__init__(compony_name)
+# class DroneDelivery (DeliveryMethod):
+#      def __init__(self, compony_name):
+#          super().__init__(compony_name)
 
-     def deliver(self,order_id):
-        print (f"{self.compony_name} Order: {order_id} - Drone delivery")
+#      def deliver(self,order_id):
+#         print (f"{self.compony_name} Order: {order_id} - Drone delivery")
 
 
-dron = DroneDelivery("drony")
-bike = BikeDelivery("bikey")
-dron.deliver(101)
-bike.deliver(102)
+# dron = DroneDelivery("drony")
+# bike = BikeDelivery("bikey")
+# dron.deliver(101)
+# bike.deliver(102)
+
+# # question 4
+# class DeliveryMethod(ABC):
+
+#     @abstractmethod
+#     def deliver(self,order_id):
+#         pass
+
+#     @abstractmethod
+#     def get_eta(self):
+#         pass
+    
+# class BikeDelivery (DeliveryMethod):
+#      def __init__(self, compony_name):
+#          self.compony_name = compony_name
+     
+#      def deliver(self,order_id):
+#         print (f"{self.compony_name} Order: {order_id} - Bike delivery")
+
+#      def get_eta(self):
+#          return 30
+
+# class DroneDelivery (DeliveryMethod):
+#      def __init__(self, compony_name):
+#          super().__init__(compony_name)
+
+#      def deliver(self,order_id):
+#         print (f"{self.compony_name} Order: {order_id} - Drone delivery")
+
+#      def get_eta(self):
+#         return 15
+     
+# bike = BikeDelivery("bikey")
+# bike.deliver(1)
+# bike.get_eta
+
+
+
