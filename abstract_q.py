@@ -195,35 +195,132 @@ from abc import ABC, abstractmethod
 # for notification in notifier_list:
 #     print (notification.send ("customer_42", "Your order is under way"))
 
-# question 9
-class Restaurant (ABC):
+# # question 9
+# class Restaurant (ABC):
+#     @abstractmethod
+#     def get_menu() -> list:
+#         pass
+#     @abstractmethod
+#     def prepare_order (item_name):
+#         pass
+
+# class ItalianRestaurant (Restaurant):
+#     menu = ['pasta', 'pizza', 'tiramisu']
+#     def get_menu(menu) -> list:
+#         return menu
+#     def prepare_order (self, item_name):
+#         return f"Sto preparando questo cibo per te: {item_name}"
+
+# class SushiRestaurant (Restaurant):
+#     menu = ['maki', 'nigiri', 'ramen']
+#     def get_menu(menu) -> list:
+#         return menu
+#     def prepare_order (self, item_name):
+#         return f"Kiminotameni kono ryōri o tsukutte iru nda: {item_name}"
+
+# class BurgerJoint (Restaurant):
+#     menu = ['burger', 'fries', 'shake']
+#     def get_menu(menu) -> list:
+#         menu
+#     def prepare_order (self, item_name):
+#         return f"Were are preparing {item_name} in the speed of light"
+
+# for rest in [ItalianRestaurant(), SushiRestaurant(), BurgerJoint()]:
+#     print (f"Menu: {rest.menu}\nPreparing: {rest.prepare_order(rest.menu[0])}\n")
+
+# question 10
+class DeliveryMethod (ABC):
     @abstractmethod
-    def get_menu() -> list:
+    def deliver(order_id):
         pass
     @abstractmethod
-    def prepare_order (item_name):
+    def get_eta():
+        pass
+    @abstractmethod
+    def get_cost(distance_km):
         pass
 
-class ItalianRestaurant (Restaurant):
-    menu = ['pasta', 'pizza', 'tiramisu']
-    def get_menu(menu) -> list:
-        return menu
-    def prepare_order (self, item_name):
-        return f"Sto preparando questo cibo per te: {item_name}"
+class BikeDelivery(DeliveryMethod):
+    def __init__(self):
+        self.cost_per_km = 10
+    def deliver(order_id):
+        print ("Deliver by bike")
+    
+    def get_eta(self):
+        return 60
+    
+    def get_cost(self,distance_km):
+        return distance_km * self.cost_per_km
 
-class SushiRestaurant (Restaurant):
-    menu = ['maki', 'nigiri', 'ramen']
-    def get_menu(menu) -> list:
-        return menu
-    def prepare_order (self, item_name):
-        return f"Kiminotameni kono ryōri o tsukutte iru nda: {item_name}"
+class DroneDelivery(DeliveryMethod):
+    def __init__(self):
+        self.cost_per_km = 11
+    def deliver(order_id):
+        print ("Deliver by Drone")
+    
+    def get_eta(self):
+        return 40
+    
+    def get_cost(self,distance_km):
+        return distance_km * self.cost_per_km
 
-class BurgerJoint (Restaurant):
-    menu = ['burger', 'fries', 'shake']
-    def get_menu(menu) -> list:
-        menu
-    def prepare_order (self, item_name):
-        return f"Were are preparing {item_name} in the speed of light"
+class CarDelivery(DeliveryMethod):
+    def __init__(self):
+        self.cost_per_km = 12
+    def deliver(order_id):
+        print ("Deliver by car")
+    
+    def get_eta(self):
+        return 50
+    
+    def get_cost(self,distance_km):
+        return distance_km * self.cost_per_km
 
-for rest in [ItalianRestaurant(), SushiRestaurant(), BurgerJoint()]:
-    print (f"Menu: {rest.menu}\nPreparing: {rest.prepare_order(rest.menu[0])}\n")
+class WalkingDelivery(DeliveryMethod):
+    def __init__(self):
+        self.cost_per_km = 5
+
+    def deliver(order_id):
+        print ("Deliver by foot")
+    
+    def get_eta(self):
+        return 100
+    
+    def get_cost(self, distance_km):
+        return distance_km * self.cost_per_km
+
+
+
+class Platform:
+    
+    delivery_options = [WalkingDelivery(),CarDelivery(), BikeDelivery(),DroneDelivery()]
+
+    def cheapest_option (distance_km):
+
+        cheapest = float('inf')
+        method = None
+
+        for option in Platform.delivery_options:
+
+            cost = option.get_cost(distance_km)
+            if cost < cheapest:
+                cheapest = cost
+                method = option
+        return method
+    
+    def fastest_option ():
+        
+        fastest = float('inf')
+        method = None
+
+        for option in Platform.delivery_options:
+            speed = option.get_eta() 
+            if speed < fastest:
+                fastest = speed
+                method = option
+
+        return method
+    
+
+print (f"The cheapest option is: {Platform.cheapest_option(10).__class__.__name__} | The fastest option is: {Platform.fastest_option().__class__.__name__}")
+
